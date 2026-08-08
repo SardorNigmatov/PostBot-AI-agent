@@ -1,17 +1,40 @@
-# Maxfiy ma'lumotlar - HECH QACHON yuklanmasin
+# ============================================
+# MAXFIY - HECH QACHON YUKLANMASIN
+# ============================================
 .env
+.env.local
 *.session
 *.session-journal
 
 # Ma'lumotlar bazasi
 data/
 *.db
+*.sqlite
+*.sqlite3
 
+# ============================================
 # Python
+# ============================================
 venv/
+env/
+ENV/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
 
-# IDE
+# ============================================
+# IDE va OS
+# ============================================
 .vscode/
 .idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Loglar
+# ============================================
+*.log
+logs/
