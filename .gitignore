@@ -1,0 +1,17 @@
+# Maxfiy ma'lumotlar - HECH QACHON yuklanmasin
+.env
+*.session
+*.session-journal
+
+# Ma'lumotlar bazasi
+data/
+*.db
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/

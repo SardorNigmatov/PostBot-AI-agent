@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(venv/Scripts/python.exe -c \"import scheduler\")",
+      "Bash(venv/Scripts/python.exe -c \"import scheduler; print\\('OK'\\)\")",
+      "Bash(venv/Scripts/python.exe -c ' *)"
+    ]
+  }
+}
