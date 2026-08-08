@@ -244,3 +244,22 @@ NEWS_KEYWORDS: Final[tuple[str, ...]] = (
     "ai model",
     "ai agent",
 )
+
+# ---------------------------------------------------------------------------
+# HTTP proksi (PythonAnywhere bepul akkaunti uchun)
+# ---------------------------------------------------------------------------
+# PythonAnywhere bepul tarifida tashqi internetga faqat proksi orqali
+# chiqiladi. Lokal kompyuterda bu bo'sh qoladi va proksi ishlatilmaydi.
+#
+# .env fayliga qo'shing (faqat serverda):
+#   PROXY_URL=http://proxy.server:3128
+
+PROXY_URL: Final[str | None] = os.getenv("PROXY_URL", "").strip() or None
+
+if PROXY_URL:
+    # httpx (google-genai) va urllib (feedparser) muhit o'zgaruvchilarini
+    # o'zi o'qiydi. aiohttp o'qimaydi - unga alohida beriladi (bot.py da).
+    os.environ.setdefault("HTTP_PROXY", PROXY_URL)
+    os.environ.setdefault("HTTPS_PROXY", PROXY_URL)
+    os.environ.setdefault("http_proxy", PROXY_URL)
+    os.environ.setdefault("https_proxy", PROXY_URL)

@@ -3,6 +3,7 @@ import json
 import logging
 from functools import wraps
 
+from config import BOT_TOKEN, ADMIN_ID, CHANNEL_ID, TOPIC_LABELS, PROXY_URL
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.filters import Command
@@ -62,8 +63,14 @@ dp = Dispatcher(storage=MemoryStorage())
 
 
 def _new_bot() -> Bot:
-    """Har bir so'rov uchun yangi Bot (va yangi aiohttp sessiya) yaratadi."""
-    return Bot(token=BOT_TOKEN, session=AiohttpSession())
+    """
+    Har bir so'rov uchun yangi Bot (va yangi aiohttp sessiya) yaratadi.
+
+    PythonAnywhere bepul akkauntida proksi majburiy - aiohttp muhit
+    o'zgaruvchilaridagi proksini o'zi o'qimaydi, shuning uchun aniq beramiz.
+    """
+    session = AiohttpSession(proxy=PROXY_URL) if PROXY_URL else AiohttpSession()
+    return Bot(token=BOT_TOKEN, session=session)
 
 
 # ---------- Telegram buyruqlar menyusi ----------

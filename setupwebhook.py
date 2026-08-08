@@ -22,14 +22,15 @@ import sys
 
 from aiogram import Bot
 from aiogram.client.session.aiohttp import AiohttpSession
-
+from config import BOT_TOKEN, WEBHOOK_SECRET, PROXY_URL
 from config import BOT_TOKEN, WEBHOOK_SECRET
 
 ALLOWED_UPDATES = ["message", "callback_query", "message_reaction_count"]
 
 
 async def show_info():
-    bot = Bot(token=BOT_TOKEN, session=AiohttpSession())
+    session = AiohttpSession(proxy=PROXY_URL) if PROXY_URL else AiohttpSession()
+    bot = Bot(token=BOT_TOKEN, session=session)
     try:
         info = await bot.get_webhook_info()
         print(f"URL: {info.url or '(o‘rnatilmagan)'}")
@@ -52,7 +53,8 @@ async def set_webhook(base_url: str):
 
     webhook_url = f"{base_url}/webhook/{WEBHOOK_SECRET}"
 
-    bot = Bot(token=BOT_TOKEN, session=AiohttpSession())
+    session = AiohttpSession(proxy=PROXY_URL) if PROXY_URL else AiohttpSession()
+    bot = Bot(token=BOT_TOKEN, session=session)
     try:
         await bot.set_webhook(
             url=webhook_url,
@@ -67,7 +69,8 @@ async def set_webhook(base_url: str):
 
 
 async def delete_webhook():
-    bot = Bot(token=BOT_TOKEN, session=AiohttpSession())
+    session = AiohttpSession(proxy=PROXY_URL) if PROXY_URL else AiohttpSession()
+    bot = Bot(token=BOT_TOKEN, session=session) 
     try:
         await bot.delete_webhook(drop_pending_updates=False)
         print("✅ Webhook o'chirildi.")
